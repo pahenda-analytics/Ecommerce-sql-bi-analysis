@@ -1,4 +1,8 @@
-CREATE VIEW v_clean_ecommerce_data AS 
+-- Keep all transactional records in the analytical view.
+-- Customer-level analyses will filter customer_id IS NOT NULL
+-- rather than removing anonymous transactions globally.
+
+CREATE OR REPLACE VIEW v_clean_ecommerce_data AS 
 SELECT 
     invoice,
     stockcode,
@@ -25,5 +29,4 @@ SELECT
     profit,
     CAST(churn_flag AS INT) AS churn_flag 
 FROM sales_data 
-WHERE invoice IS NOT NULL 
-  AND customer_id IS NOT NULL;
+WHERE invoice IS NOT NULL ;
