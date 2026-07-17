@@ -1,5 +1,7 @@
 # Project 2 – SQL Business Intelligence Analysis
 
+![Executive Dashboard](images/dashboard-overview.png)
+
 ## Overview
 
 This project demonstrates an end-to-end Business Intelligence workflow using **PostgreSQL**, **SQL**, and **Power BI** to analyse a large e-commerce sales dataset containing over **743,000 transactions**.
@@ -82,6 +84,8 @@ Developed SQL scripts covering:
 
 ### 4. Intermediate SQL Techniques
 
+![Month-on-Month Growth](images/sql-month-over-month-growth.png)
+
 Applied more advanced SQL features including:
 
 - Common Table Expressions (CTEs)
@@ -94,6 +98,14 @@ Applied more advanced SQL features including:
 - Month-on-Month Growth Analysis
 
 ### 5. Business Intelligence Dashboard
+
+| Executive Dashboard | Customer Analysis |
+|---------------------|-------------------|
+| ![](images/dashboard-overview.png) | ![](images/dashboard-customers.png) |
+
+| Product Analysis | Marketing & Returns |
+|------------------|---------------------|
+| ![](images/dashboard-products.png) | ![](images/dashboard-marketing-returns.png) |
 
 Connected PostgreSQL directly to Power BI and developed an interactive dashboard featuring:
 
@@ -209,3 +221,5 @@ Compared with Project 1, the analysis moves beyond spreadsheet-based cleaning in
 ➡ **Project 3 – Python Data Automation Pipeline**
 
 The next project builds upon the SQL reporting layer developed here by introducing Python automation. Using the multi-table Brazilian Olist dataset, the project automates data ingestion, cleaning, KPI generation and reporting through a reusable ETL pipeline. This demonstrates how Python can complement SQL and Business Intelligence tools to automate recurring analytical workflows.
+
+[def]: images/dashboard_overview.png
