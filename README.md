@@ -1,92 +1,128 @@
-# Project 2 – SQL Business Intelligence Analysis
+# Ecommerce SQL BI Analysis
 
-![Executive Dashboard](images/dashboard-overview.png)
+![Dashboard Overview](images/dashboard-overview.png)
 
 ## Overview
 
-This project demonstrates an end-to-end Business Intelligence workflow using **PostgreSQL**, **SQL**, and **Power BI** to analyse a large e-commerce sales dataset containing over **743,000 transactions**.
+This project demonstrates an end-to-end Business Intelligence workflow using **PostgreSQL**, **SQL**, and **Power BI** to analyse over **743,000 retail transactions** from a synthetic e-commerce dataset.
 
-Building on the data cleaning completed in Project 1, the dataset was imported into PostgreSQL where a reusable analytical view was created to standardise the data for reporting. SQL was then used to answer key business questions, generate business KPIs, and perform customer, product, marketing, churn and returns analysis. Finally, the cleaned dataset was connected to Power BI to create an interactive executive dashboard.
+After importing the raw dataset into PostgreSQL, a reusable reporting view was created to standardise data types and prepare the data for analysis. SQL was then used to answer key business questions through analytical queries covering sales performance, customer behaviour, product performance, marketing effectiveness, customer churn and product returns. The cleaned reporting layer was finally connected directly to Power BI to build an interactive executive dashboard.
 
-The project demonstrates how SQL can be used not only for querying data, but also for creating scalable reporting datasets that support Business Intelligence solutions.
+The project demonstrates practical SQL skills used by Data Analysts and Business Intelligence Analysts, including database design, reporting views, aggregations, Common Table Expressions (CTEs), Window Functions and dashboard development.
 
 ---
 
-## Objectives
+## Business Problem
 
-- Import a large transactional dataset into PostgreSQL
-- Create a reusable SQL analytical view for reporting
-- Clean and standardise data using SQL transformations
-- Analyse business performance using SQL queries
-- Demonstrate intermediate SQL concepts including CTEs and Window Functions
-- Build an interactive Power BI dashboard
-- Produce business insights suitable for executive reporting
+Retail businesses generate large volumes of transactional data, but raw operational databases are rarely structured for reporting.
+
+The objective of this project was to build a reusable SQL reporting layer that could answer common business questions including:
+
+- How much revenue and profit is the business generating?
+- Which customers and products generate the highest value?
+- Which marketing channels perform best?
+- How do sales change month-to-month?
+- What impact do discounts and returns have on profitability?
+- Which customer segments are most valuable?
+
+The finished SQL model provides a scalable foundation for Power BI dashboards and executive reporting.
 
 ---
 
 ## Dataset
 
-**Dataset:** Synthetic E-Commerce Sales Dataset
+**Synthetic E-Commerce Sales Dataset**
 
-The dataset contains approximately **743,000 retail transactions** across multiple business dimensions, including:
+Approximately:
 
-- Sales Transactions
-- Products
-- Customers
-- Customer Demographics
-- Marketing Channels
-- Countries
-- Revenue
-- Profit
-- Discounts
-- Delivery Information
-- Customer Churn Indicators
+- **743,486 transactions**
+- **38,978 orders**
+- **5,000 customers**
+- Multiple countries
+- Customer demographics
+- Product hierarchy
+- Marketing channels
+- Returns (credit-note invoices)
+- Churn indicators
 
-Unlike Project 1, this project retains all valid transactional records—including anonymous purchases without customer IDs—to preserve financial reporting accuracy. Customer-specific analyses apply filtering only where appropriate.
+Unlike the spreadsheet-based cleaning performed in **Project 1**, this SQL project preserves anonymous transactions (orders without customer IDs) to maintain accurate financial reporting while filtering customer-level analyses only where appropriate.
 
 ---
 
-## Methodology / Workflow
+## Data Preparation
 
-### 1. Database Creation
+The reporting layer was built inside PostgreSQL using a reusable SQL view.
 
-- Imported the raw dataset into PostgreSQL
-- Created the `sales_data` table
-- Verified successful data import
+### SQL Reporting View
 
-### 2. SQL Data Transformation
+![SQL Reporting View](images/sql-reporting-view.png)
 
-Created the reusable analytical view:
+Key preparation steps included:
 
-`v_clean_ecommerce_data`
+- Importing the raw CSV dataset into PostgreSQL
+- Creating the `sales_data` table
+- Building the reusable `v_clean_ecommerce_data` reporting view
+- Casting text fields into appropriate numeric and timestamp data types
+- Removing invalid invoices
+- Preserving anonymous transactions with NULL customer IDs
+- Creating a consistent reporting layer for Power BI
 
-Transformations included:
+---
 
-- Data type conversions
-- Date formatting
-- Integer casting
-- Removal of invalid invoices
-- Preservation of anonymous customer transactions
-- Creation of a standardised reporting layer
+## SQL Analysis
 
-### 3. Business KPI Analysis
+SQL scripts cover multiple areas of business analysis.
 
-Developed SQL scripts covering:
+### Sales Overview
 
-- Sales Overview
-- Customer Analysis
-- Product Analysis
-- Country Analysis
-- Marketing Analysis
-- Discount Analysis
-- Churn Analysis
-- Returns Analysis
+- Executive KPIs
+- Monthly Revenue
+- Monthly Profit
+- Running Revenue Totals
 
-### 4. Intermediate SQL Techniques
+### Customer Analysis
 
-![Month-on-Month Growth](images/sql-month-over-month-growth.png)
+- Top Customers
+- Customer Segments
+- Average Customer Age
+- Customer Rankings
 
-Applied more advanced SQL features including:
+### Product Analysis
+
+- Revenue by Category
+- Revenue by Subcategory
+- Top Products
+
+### Country Analysis
+
+- Revenue by Country
+- Customer Distribution
+
+### Marketing Analysis
+
+- Revenue by Marketing Channel
+- Profit by Marketing Channel
+
+### Discount Analysis
+
+- Discount vs Non-discount Performance
+
+### Churn Analysis
+
+- Revenue and Profit by Churn Status
+
+### Returns Analysis
+
+- Return Rate
+- Cancelled Invoice Analysis
+
+### Intermediate SQL
+
+The project also demonstrates intermediate SQL concepts commonly used in Business Intelligence.
+
+![Month-on-Month Growth Query](images/sql-month-over-month-growth.png)
+
+Topics covered include:
 
 - Common Table Expressions (CTEs)
 - Window Functions
@@ -97,7 +133,9 @@ Applied more advanced SQL features including:
 - Running Totals
 - Month-on-Month Growth Analysis
 
-### 5. Business Intelligence Dashboard
+---
+
+## Dashboard
 
 | Executive Dashboard | Customer Analysis |
 |---------------------|-------------------|
@@ -107,119 +145,113 @@ Applied more advanced SQL features including:
 |------------------|---------------------|
 | ![](images/dashboard-products.png) | ![](images/dashboard-marketing-returns.png) |
 
-Connected PostgreSQL directly to Power BI and developed an interactive dashboard featuring:
+The Power BI dashboard connects directly to the PostgreSQL reporting view and includes:
 
-- Executive KPIs
-- Sales Trends
-- Customer Analysis
-- Product Performance
-- Marketing Performance
-- Returns Analysis
+- Executive KPI cards
+- Revenue and Profit trends
+- Customer segmentation
+- Product performance
+- Country analysis
+- Marketing performance
+- Interactive filtering
+- Returns analysis
 
 ---
 
-## Key Findings
+## Results
 
-Analysis of the dataset highlighted several important business insights:
+The completed reporting solution analysed **743,486 cleaned transactions**, producing the following business KPIs.
 
-- Revenue and profitability trends varied across product categories and customer segments.
-- Marketing channel performance showed clear differences in revenue generation.
-- Returns (credit-note invoices) represented a measurable impact on overall profitability and required separate KPI reporting.
-- Preserving anonymous transactions maintained complete financial reporting while allowing customer-focused analyses to filter registered customers only.
-- Month-on-month trend analysis provided a clearer view of revenue growth and seasonal performance.
+| KPI | Value |
+|------|------:|
+| Total Revenue | **£13.41M** |
+| Total Profit | **£5.39M** |
+| Orders | **38,978** |
+| Registered Customers | **≈5,000** |
+| Average Transaction Value | **£20.06** |
+| Return Rate | **5.67%** |
+
+### Key Findings
+
+- Generated over **£13.4 million** in revenue across nearly **39,000** completed orders.
+- Overall profit exceeded **£5.39 million**, demonstrating healthy profitability.
+- Product categories contributed unevenly to revenue, highlighting opportunities for inventory optimisation.
+- Marketing channels produced noticeably different profitability despite similar customer volumes.
+- Month-on-month trend analysis identified clear seasonal changes in both revenue and profit.
+- Approximately **5.7%** of invoices represented returns (credit-note transactions), reinforcing the importance of reporting returns separately from completed sales.
+- Retaining anonymous transactions (NULL customer IDs) preserved complete financial reporting while allowing customer-level analyses to focus on registered customers only.
+
+---
+
+## Technologies
+
+### Languages
+
+- SQL
+
+### Database
+
+- PostgreSQL
+
+### Business Intelligence
+
+- Power BI Desktop
+
+### Development Tools
+
+- pgAdmin 4
+- Visual Studio Code
+- Git
+- GitHub
 
 ---
 
 ## Repository Structure
 
 ```text
-sql-bi-analysis/
+ecommerce-sql-bi-analysis/
 
 │── data/
-│    └── raw/
+│   └── raw/
+
+│── images/
+│   ├── dashboard-overview.png
+│   ├── dashboard-customers.png
+│   ├── dashboard-products.png
+│   ├── dashboard-marketing-returns.png
+│   ├── sql-reporting-view.png
+│   ├── sql-sales-overview-query.png
+│   ├── sql-month-over-month-growth.png
+│   └── sql-window-functions.png
+
+│── powerbi/
+│   └── Ecommerce_Dashboard.pbix
 
 │── sql/
-│    ├── 01_create_table.sql
-│    ├── 02_transform_sales_view.sql
-│    ├── 03_sales_overview.sql
-│    ├── 04_customer_analysis.sql
-│    ├── 05_product_analysis.sql
-│    ├── 06_country_analysis.sql
-│    ├── 07_marketing_analysis.sql
-│    ├── 08_discount_analysis.sql
-│    ├── 09_churn_analysis.sql
-│    ├── 10_intermediate_analysis.sql
-│    └── 11_returns_analysis.sql
-
-│── dashboard/
-│    └── Ecommerce_Dashboard.pbix
-
-│── screenshots/
-
-│── docs/
+│   ├── 01_init_sales_schema.sql
+│   ├── 02_transform_sales_view.sql
+│   ├── 03_analytics_mom_metrics.sql
+│   ├── 04_sales_overview.sql
+│   ├── 05_customer_analysis.sql
+│   ├── 06_product_analysis.sql
+│   ├── 07_country_analysis.sql
+│   ├── 08_marketing_analysis.sql
+│   ├── 09_discount_analysis.sql
+│   ├── 10_churn_analysis.sql
+│   ├── 11_intermediate_analysis.sql
+│   └── 12_returns_analysis.sql
 
 └── README.md
 ```
 
 ---
 
-## Skills Demonstrated
-
-### SQL
-
-- PostgreSQL
-- Data Transformation
-- Views
-- Aggregations
-- CASE Statements
-- GROUP BY
-- HAVING
-- ORDER BY
-- CTEs
-- Window Functions
-- Running Totals
-- Time-Series Analysis
-
-### Business Intelligence
-
-- KPI Development
-- Executive Reporting
-- Dashboard Design
-- Data Visualisation
-- Interactive Filtering
-
-### Analytical Skills
-
-- Sales Performance Analysis
-- Customer Analytics
-- Product Analytics
-- Marketing Analytics
-- Returns Analysis
-- Churn Analysis
-- Business Insight Generation
-
-### Tools
-
-- PostgreSQL
-- pgAdmin 4
-- SQL
-- Power BI Desktop
-- GitHub
-
----
-
-## Project Outcome
-
-This project demonstrates the complete Business Intelligence workflow from raw transactional data to executive reporting.
-
-Compared with Project 1, the analysis moves beyond spreadsheet-based cleaning into relational databases and SQL-driven analytics, showcasing industry-standard practices used by Data Analysts and Business Intelligence professionals. The resulting PostgreSQL reporting layer provides a scalable foundation for Power BI dashboards while demonstrating intermediate SQL techniques commonly required in analyst roles.
-
----
-
 ## Next Project
 
-➡ **Project 3 – Python Data Automation Pipeline**
+➡ **Python Monthly Reporting Pipeline**
 
-The next project builds upon the SQL reporting layer developed here by introducing Python automation. Using the multi-table Brazilian Olist dataset, the project automates data ingestion, cleaning, KPI generation and reporting through a reusable ETL pipeline. This demonstrates how Python can complement SQL and Business Intelligence tools to automate recurring analytical workflows.
+The next project builds on the SQL reporting layer developed here by introducing Python automation. Using the Brazilian Olist dataset, it automates data ingestion, cleaning, KPI generation and monthly reporting through a reusable ETL pipeline. Together, the three portfolio projects demonstrate progression from spreadsheet transformation, to SQL analytics, to automated reporting workflows.
 
-[def]: images/dashboard_overview.png
+**Repository:** https://github.com/pahenda-analytics/python-monthly-reporting-pipeline
+
+---
